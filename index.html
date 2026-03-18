@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>敖伟杰 - 个人主页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 40px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: 4px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            flex-shrink: 0;
+        }
+
+        .header-info h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .section {
+            padding: 40px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: #667eea;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: #667eea;
+            border-radius: 2px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .info-content h4 {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 4px;
+        }
+
+        .info-content p {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .skill-category h4 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .skill-name {
+            font-size: 15px;
+        }
+
+        .skill-level {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .level-master {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .level-learning {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .level-basic {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .course-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .course-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .contact-item:hover {
+            background: #e9ecef;
+            transition: background 0.3s;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #667eea;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .timeline-time {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 10px;
+        }
+
+        .timeline-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .achievement-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        .achievement-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .achievement-time {
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 10px;
+        }
+
+        .achievement-desc {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .hobbies {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .hobby-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 15px;
+        }
+
+        .quote {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 18px;
+            font-style: italic;
+            margin-top: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .learning-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .stat-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .blog-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .blog-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .blog-item:last-child {
+            border-bottom: none;
+        }
+
+        .blog-title {
+            font-size: 15px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .blog-date {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: 4px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            flex-shrink: 0;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .avatar:hover {
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .typing-effect {
+            overflow: hidden;
+            border-right: 3px solid white;
+            white-space: nowrap;
+            animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: white }
+        }
+
+        .motto {
+            font-size: 16px;
+            margin-top: 15px;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+            }
+
+            .tags {
+                justify-content: center;
+            }
+
+            .section {
+                padding: 25px 20px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="avatar">👨‍💻</div>
+            <div class="header-info">
+                <h1>敖伟杰</h1>
+                <div class="motto typing-effect">用代码编织梦想，用数据洞察世界</div>
+                <div class="tags">
+                    <span class="tag">电子科技大学成都学院 计算机专业 大二</span>
+                    <span class="tag">前端开发学习者</span>
+                    <span class="tag">数据分析爱好者</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">校园背景</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-icon">🎓</div>
+                    <div class="info-content">
+                        <h4>学校</h4>
+                        <p>电子科技大学成都学院</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">🏫</div>
+                    <div class="info-content">
+                        <h4>学院专业</h4>
+                        <p>计算机学院 软件工程专业</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">📅</div>
+                    <div class="info-content">
+                        <h4>入学/毕业</h4>
+                        <p>2024级 | 预计2028年毕业</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">📚</div>
+                    <div class="info-content">
+                        <h4>学历层次</h4>
+                        <p>本科</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">核心学习技能</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h4>技术类</h4>
+                    <div class="skill-item">
+                        <span class="skill-name">Python</span>
+                        <span class="skill-level level-learning">学习中</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">HTML/CSS</span>
+                        <span class="skill-level level-basic">了解</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">SQL</span>
+                        <span class="skill-level level-learning">学习中</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Git</span>
+                        <span class="skill-level level-basic">了解</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>非技术类</h4>
+                    <div class="skill-item">
+                        <span class="skill-name">数据分析</span>
+                        <span class="skill-level level-learning">学习中</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">PPT制作</span>
+                        <span class="skill-level level-master">掌握</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">文档写作</span>
+                        <span class="skill-level level-master">掌握</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">团队协作</span>
+                        <span class="skill-level level-master">掌握</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">核心课程</h2>
+            <div class="course-list">
+                <span class="course-item">数据结构</span>
+                <span class="course-item">操作系统</span>
+                <span class="course-item">机器学习</span>
+                <span class="course-item">计算机网络</span>
+                <span class="course-item">数据库原理</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">校园实践与经历</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-title">班级学习委员</div>
+                    <div class="timeline-time">2024 - 至今</div>
+                    <div class="timeline-desc">协助老师组织班级学习活动，收集和整理学习资料，促进同学间的学习交流，提升班级整体学习氛围。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-title">计算机学院学生会干事</div>
+                    <div class="timeline-time">2024.09 - 至今</div>
+                    <div class="timeline-desc">参与学院各类活动的策划与执行，负责技术支持和活动宣传，锻炼了组织协调能力和沟通能力。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">竞赛与获奖成果</h2>
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <div class="achievement-title">校级新生程序设计大赛</div>
+                    <div class="achievement-time">2024.11</div>
+                    <div class="achievement-desc">参与校级程序设计竞赛，获得参与奖，积累了算法竞赛经验，提升了编程能力。</div>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-title">校级新生奖学金</div>
+                    <div class="achievement-time">2024-2025学年</div>
+                    <div class="achievement-desc">凭借优异的入学成绩和良好的学习态度，获得校级新生奖学金，激励持续努力学习。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">学习与项目成果</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-title">个人网站开发项目</div>
+                    <div class="timeline-time">2024.10 - 2024.12</div>
+                    <div class="timeline-desc">使用HTML/CSS/JavaScript开发个人主页，学习前端基础知识和网页设计原理，完成了响应式布局和交互功能。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-title">Python数据分析练习</div>
+                    <div class="timeline-time">2024.11 - 至今</div>
+                    <div class="timeline-desc">使用Python的Pandas和Matplotlib库进行数据清洗和可视化分析，完成校园食堂消费数据分析项目。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-title">学习计划</div>
+                    <div class="timeline-time">持续进行中</div>
+                    <div class="timeline-desc">正在学习：Python高级编程、前端框架Vue.js；计划：2025年参加蓝桥杯程序设计竞赛，考取计算机二级证书。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">联系方式</h2>
+            <div class="contact-list">
+                <div class="contact-item">
+                    <div class="info-icon">📧</div>
+                    <div class="info-content">
+                        <h4>邮箱</h4>
+                        <p>1372377117@qq.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="info-icon">💬</div>
+                    <div class="info-content">
+                        <h4>微信</h4>
+                        <p>A1372377117（仅学习交流）</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">兴趣爱好</h2>
+            <div class="hobbies">
+                <span class="hobby-item">🎵 听音乐</span>
+                <span class="hobby-item">🎮 玩游戏</span>
+                <span class="hobby-item">💻 编程</span>
+                <span class="hobby-item">📖 阅读</span>
+            </div>
+            <div class="quote">
+                "失败乃成功之母"
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">学习足迹</h2>
+            <div class="learning-stats">
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">代码行数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">完成项目</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">120</div>
+                    <div class="stat-label">学习小时</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">参与竞赛</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">学习笔记</h2>
+            <div class="blog-section">
+                <div class="blog-item">
+                    <span class="blog-title">Python数据分析入门：从零开始学习Pandas</span>
+                    <span class="blog-date">2024.12</span>
+                </div>
+                <div class="blog-item">
+                    <span class="blog-title">HTML/CSS学习心得：如何构建美观的网页</span>
+                    <span class="blog-date">2024.11</span>
+                </div>
+                <div class="blog-item">
+                    <span class="blog-title">数据结构学习笔记：链表与数组的区别</span>
+                    <span class="blog-date">2024.10</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">关注我</h2>
+            <div class="social-links">
+                <a href="mailto:1372377117@qq.com" class="social-link" title="邮箱">📧</a>
+                <a href="#" class="social-link" title="微信">💬</a>
+                <a href="#" class="social-link" title="GitHub">💻</a>
+                <a href="#" class="social-link" title="博客">📝</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2024 敖伟杰 | 电子科技大学成都学院 软件工程专业</p>
+            <p style="margin-top: 10px; font-size: 12px; color: #999;">在学习中试错，在实践中成长 | 每天进步一点点</p>
+            <p style="margin-top: 8px; font-size: 11px; color: #bbb;">🚀 正在努力成为更好的自己</p>
+        </div>
+    </div>
+</body>
+</html>
